@@ -1,5 +1,5 @@
 import { render } from 'inferno';
-import App from './src/components/App';
+import App from './components/App';
 
 const container = document.getElementById('app'); 
 
