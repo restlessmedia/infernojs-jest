@@ -11,7 +11,7 @@
     "debug": "gulp debug",
     "release": "gulp release",
     "gulp": "gulp",
-    "test": "jest",
+    "test": "gulp test",
     "test-one": "jest src/Span.test.js",
     "test-coverage": "jest --coverage"
   },
@@ -28,6 +28,7 @@
     "browserify": "^16.2.3",
     "gulp": "^4.0.0",
     "gulp-eslint": "^5.0.0",
+    "gulp-jest": "^4.0.2",
     "gulp-livereload": "^4.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
@@ -35,6 +36,7 @@
     "gulplog": "^1.0.0",
     "inferno-test-utils": "^7.1.7",
     "jest": "^24.1.0",
+    "jest-cli": "^24.1.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.11.0"

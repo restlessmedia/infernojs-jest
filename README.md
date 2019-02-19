@@ -1,5 +1,8 @@
 # inferno-jest
 
+[![Image of Yaktocat](https://ci.appveyor.com/api/projects/status/qv2ys80mq7ppqycp?svg=true
+)](https://ci.appveyor.com/project/restlessmedia/infernojs-jest)
+
 Sample inferno app with gulp, browserify, babel & jest.
 
 ## tests

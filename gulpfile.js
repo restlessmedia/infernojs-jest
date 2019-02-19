@@ -12,7 +12,8 @@ var babelify = require('babelify'),
   sourceMaps = require('gulp-sourcemaps'),
   uglify = require('gulp-uglify'),
   log = require('gulplog'),
-  watchify = require('watchify');
+  watchify = require('watchify'),
+  jest = require('gulp-jest').default;
 
 // This method makes it easy to use common bundling options in different tasks
 function bundle(src, options) {
@@ -84,6 +85,16 @@ const release = function () {
   });
 }
 
-gulp.task('release', release);
+const test = function(){
+  return gulp.src('src').pipe(jest({
+    "preprocessorIgnorePatterns": [
+      "<rootDir>/jsbin/", "<rootDir>/node_modules/"
+    ],
+    "automock": false
+  }));
+}
+
+gulp.task('test', test);
+gulp.task('release', gulp.series([release, test]));
 gulp.task('debug', debug);
 gulp.task('default', debug);

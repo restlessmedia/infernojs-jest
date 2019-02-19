@@ -1,3 +1,4 @@
 
-jsbin/**/*.*
-coverage/**/*.*
+jsbin
+coverage
+node_modules

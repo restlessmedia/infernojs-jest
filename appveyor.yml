@@ -1,0 +1,8 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+cache: node_modules
+build_script:
+- cmd: >-
+    npm install
+
+    npm run release
