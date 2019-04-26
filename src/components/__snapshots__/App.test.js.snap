@@ -2,6 +2,9 @@
 
 exports[`App should render 1`] = `
 <div>
-  app
+  App
+  <div
+    className="animated bounceIn "
+  />
 </div>
 `;

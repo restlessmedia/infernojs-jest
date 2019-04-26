@@ -13,14 +13,17 @@
     "gulp": "gulp",
     "test": "gulp test",
     "test-one": "jest src/Span.test.js",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage",
+    "test-updateSnapshot": "jest --updateSnapshot"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.4.3",
     "inferno": "^7.1.7"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.3.1",
     "babel-plugin-inferno": "^6.0.4",
     "babel-plugin-syntax-jsx": "^6.18.0",

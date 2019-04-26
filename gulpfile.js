@@ -16,13 +16,18 @@ var babelify = require('babelify'),
   jest = require('gulp-jest').default;
 
 // This method makes it easy to use common bundling options in different tasks
-function bundle(src, options) {
+function bundle(src, dest, options = {}) {
 
   const task = function (bundler) {
     // babelify (uses babelrc config - not specified here inline)
     bundler = bundler.transform(babelify)
       // Start bundle
       .bundle()
+      .on('error', function (err) {
+        log.error(err);
+        // end this stream
+        this.emit('end');
+      })
       // Entry point
       .pipe(source(src))
       // Convert to gulp pipeline
@@ -33,14 +38,13 @@ function bundle(src, options) {
 
     // uglify if applicable
     if (options.release === true) {
-      bundler = bundler.pipe(uglify())
-        .on('error', log.error);
+      bundler = bundler.pipe(uglify());
     }
 
     // Strip inline source maps
     bundler = bundler.pipe(sourceMaps.write('./'))
       // Save 'bundle'
-      .pipe(gulp.dest(options.dest));
+      .pipe(gulp.dest(dest));
 
     // Reload browser if applicable
     if (options.release !== true) {
@@ -73,19 +77,16 @@ function bundle(src, options) {
 }
 
 const debug = function () {
-  return bundle('./src/index.js', {
-    dest: './jsbin/debug',
-  });
+  return bundle('./src/index.js', './jsbin/debug');
 }
 
 const release = function () {
-  return bundle('./src/index.js', {
-    dest: './jsbin/release',
+  return bundle('./src/index.js', './jsbin/release', {
     release: true
   });
 }
 
-const test = function(){
+const test = function () {
   return gulp.src('src').pipe(jest({
     "preprocessorIgnorePatterns": [
       "<rootDir>/jsbin/", "<rootDir>/node_modules/"
@@ -95,6 +96,6 @@ const test = function(){
 }
 
 gulp.task('test', test);
-gulp.task('release', gulp.series([release, test]));
+gulp.task('release', gulp.series([test, release]));
 gulp.task('debug', debug);
 gulp.task('default', debug);

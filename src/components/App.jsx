@@ -1,8 +1,14 @@
 import { Component } from 'inferno';
+import Animated from './Animated';
 
 class App extends Component {
   render() {
-    return <div>app</div>
+    return (
+      <div>
+        App
+        <Animated />
+      </div>
+    )
   }
 }
 

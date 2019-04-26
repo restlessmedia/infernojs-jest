@@ -20,6 +20,7 @@ class Animated extends Component {
     }
     this.show = this.show.bind(this);
     this.data = null;
+    this.handleRef = this.handleRef.bind(this);
   }
 
   async loadData() {
