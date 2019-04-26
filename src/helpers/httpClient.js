@@ -1,3 +1,5 @@
+import { default as HttpRequest } from './HttpRequest';
+
 const httpMethod = {
   get: 'get',
   post: 'post',
@@ -9,7 +11,7 @@ const httpStatus = {
 }
 
 const send = (url, method, options = {}, body = null) => {
-  const request = new XMLHttpRequest();
+  const request = new HttpRequest();
 
   // add headers
   if (options.headers) {
