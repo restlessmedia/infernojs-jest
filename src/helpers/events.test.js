@@ -1,11 +1,11 @@
 import { listenToOnceAsync, listenToOnce } from './events';
 
 describe('events', () => {
-  describe('listenToOnceAsync', () => {
-    // custom event
-    const event = new Event('build');
-    const node = document.createElement('div');
+  // custom event
+  const event = new Event('build');
+  const node = document.createElement('div');
 
+  describe('listenToOnceAsync', () => {
     it('should only trigger once', () => {
       // get the promise
       const prom = listenToOnceAsync(node, 'build');

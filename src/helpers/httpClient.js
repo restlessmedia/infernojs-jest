@@ -1,4 +1,4 @@
-import { default as HttpRequest } from './HttpRequest';
+import HttpRequest from './HttpRequest';
 
 const httpMethod = {
   get: 'get',
@@ -15,7 +15,7 @@ const send = (url, method, options = {}, body = null) => {
 
   // add headers
   if (options.headers) {
-    for (let key in Object.keys(options.headers)) {
+    for (let key in options.headers) {
       try {
         request.setRequestHeader(key, options.headers[key]);
       } catch (e) {
@@ -29,10 +29,10 @@ const send = (url, method, options = {}, body = null) => {
     request.open(method, url, true);
     request.onreadystatechange = () => {
       if (request.readyState === 4 && request.status === httpStatus.ok) {
-        resolve(xhr.responseText, xhr);
+        resolve(request.responseText, request);
       }
     }
-    request.onerror = (e) => reject(e, xhr);
+    request.onerror = (e) => reject(e, request);
   });
 
   request.send(body);
@@ -40,14 +40,14 @@ const send = (url, method, options = {}, body = null) => {
   return promise;
 }
 
-export const httpGet = url => {
-  return send(url, httpMethod.get);
+export const httpGet = (url, options = {}) => {
+  return send(url, httpMethod.get, options);
 }
 
-export const httpPost = (url, body, options) => {
+export const httpPost = (url, body, options = {}) => {
   return send(url, httpMethod.post, options, body);
 }
 
-export const httpPut = (url, body, options) => {
+export const httpPut = (url, body, options = {}) => {
   return send(url, httpMethod.put, options, body);
 }
